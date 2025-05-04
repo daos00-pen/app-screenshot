@@ -1,18 +1,12 @@
 import streamlit as st
 import time
 import psutil
-import random
-import os
-import sys
-from PIL import Image, ImageDraw, ImageOps
-from PIL.Image import Resampling
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from os.path import exists
 
 st.set_page_config(page_title="🎈 App Screenshot")
 st.title('🎈 App Screenshot')
@@ -67,30 +61,8 @@ with st.sidebar:
 # Input URL
 with st.form("my_form"):
     app_url = st.text_input('App URL', 'https://langchain-quickstart.streamlit.app').rstrip('/')
-    app_name = app_url.replace('https://','').replace('.streamlit.app','')
     
     submitted = st.form_submit_button("Submit")
     if submitted:
         if app_url:
             st.write(get_scrape_html(app_url))
-
-
-
-
-
-
-
-file_exists = exists('screenshot.png')
-if file_exists:
-    with open("final.png", "rb") as file:
-        btn = st.download_button(
-            label="Download image",
-            data=file,
-            file_name=f"{app_name}.png",
-            mime="image/png"
-            )
-        if btn:
-            os.remove('screenshot.png')
-            os.remove('final.png')
-
-
