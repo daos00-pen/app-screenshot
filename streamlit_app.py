@@ -73,7 +73,7 @@ with st.form("my_form"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         if app_url:
-            get_scrape_html(app_url)
+            st.write(get_scrape_html(app_url))
 
 
 
